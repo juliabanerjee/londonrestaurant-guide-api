@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins  =  "http://localhost:3000")
 public class LondonRestaurantGuideController {
     @Autowired
            LondonRestaurantGuideRepository repository;
@@ -24,6 +25,11 @@ public class LondonRestaurantGuideController {
         return repository.findAll();
     }
 
+    @GetMapping("/restaurant/{id}")
+    public LondonRestaurantGuide getRestaurantByid(@PathVariable String id){
+       return repository.findRestaurantByid(Integer.parseInt(id));
+    }
+
     @PostMapping("/restaurant")
     public String createRestaurant(@RequestBody LondonRestaurantGuide restaurant){
         repository.save(restaurant);
@@ -31,14 +37,14 @@ public class LondonRestaurantGuideController {
         return "Restaurant " + restaurant.getName() + " has been added";
     }
 
-//    @DeleteMapping("restaurant/{id}")
-//    @Transactional
-//    public String deleteRestaurant(@PathVariable int id){
-//        londonRestaurants.deleteRestaurantByid();
-//        return "Restaurant" + id + "has been deleted";
-//    }
+    @DeleteMapping("restaurant/{id}")
+    @Transactional
+    public String deleteRestaurant(@PathVariable String id){
+        repository.deleteRestaurantByid(Integer.parseInt(id));
+        return "Restaurant" + id + "has been deleted";
+    }
 
-//    @PostMapping("restaurant/")
+    //edit endpoint
 
 
 

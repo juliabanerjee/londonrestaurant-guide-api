@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface LondonRestaurantGuideRepository extends JpaRepository<LondonRestaurantGuide, String>
 {
     //where we write custom methods
-//    LondonRestaurantGuide findRestaurantByid(int id);
+    LondonRestaurantGuide findRestaurantByid(int id);
+    String deleteRestaurantByid(int id);
 
 }
